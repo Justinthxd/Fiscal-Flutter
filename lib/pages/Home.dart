@@ -256,6 +256,63 @@ class _HomeState extends State<Home> {
                               ],
                             ),
                           ),
+                          Container(
+                            height: 300,
+                            width: 250,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: const [
+                                BoxShadow(
+                                  blurRadius: 5,
+                                  color: Colors.black26,
+                                  offset: Offset(0, 0),
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const Text(
+                                  'Paso 3',
+                                  style: TextStyle(
+                                    color: Colors.black87,
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                                const Icon(
+                                  Icons.note_add_rounded,
+                                  size: 100,
+                                ),
+                                const Text(
+                                  'Crear y enviar solicitud',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    padding: const EdgeInsets.all(15),
+                                    backgroundColor: Colors.teal,
+                                  ),
+                                  child: const Text(
+                                    'Solicitud',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, '/Solicitud');
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     ],

@@ -53,7 +53,9 @@ class _Solicitud2State extends State<Solicitud2> {
                           ),
                         ),
                         onTap: () {
-                          Navigator.pop(context);
+                          Navigator.of(context)
+                            ..pop()
+                            ..pop();
                         },
                       ),
                       const SizedBox(width: 20),
@@ -103,9 +105,11 @@ class _Solicitud2State extends State<Solicitud2> {
                   height: 1500,
                   alignment: Alignment.center,
                   padding: EdgeInsets.symmetric(
-                      vertical: 30, horizontal: size.width * 0.3),
+                    vertical: 30,
+                    horizontal: size.width * 0.25,
+                  ),
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade900.withOpacity(0.99),
+                    color: Colors.white.withOpacity(0.99),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -127,11 +131,10 @@ class _Solicitud2State extends State<Solicitud2> {
                             groupValue: true,
                             onChanged: (value) {},
                           ),
-                          Text(
+                          const Text(
                             'Si, Tengo pruebas',
                             style: TextStyle(
                               fontSize: 17,
-                              color: Colors.white,
                             ),
                           ),
                         ],
@@ -145,11 +148,10 @@ class _Solicitud2State extends State<Solicitud2> {
                             groupValue: true,
                             onChanged: (value) {},
                           ),
-                          Text(
+                          const Text(
                             'No, No tengo pruebas',
                             style: TextStyle(
                               fontSize: 17,
-                              color: Colors.white,
                             ),
                           ),
                         ],
@@ -162,14 +164,13 @@ class _Solicitud2State extends State<Solicitud2> {
                           maxLines: 10,
                           style: const TextStyle(
                             fontSize: 18.5,
-                            color: Colors.white,
                           ),
                           decoration: InputDecoration(
                             filled: true,
-                            fillColor: Colors.black.withOpacity(0.2),
-                            labelText: 'Escribe las pruebas que posee.',
+                            fillColor: Colors.black.withOpacity(0.1),
+                            labelText: 'Escribe las pruebas que posee. . .',
                             labelStyle: const TextStyle(
-                              color: Colors.white,
+                              color: Colors.black54,
                               fontSize: 18,
                               fontWeight: FontWeight.w500,
                             ),
@@ -197,11 +198,10 @@ class _Solicitud2State extends State<Solicitud2> {
                             groupValue: true,
                             onChanged: (value) {},
                           ),
-                          Text(
+                          const Text(
                             'Si, Tengo testigos',
                             style: TextStyle(
                               fontSize: 17,
-                              color: Colors.white,
                             ),
                           ),
                         ],
@@ -215,11 +215,10 @@ class _Solicitud2State extends State<Solicitud2> {
                             groupValue: true,
                             onChanged: (value) {},
                           ),
-                          Text(
+                          const Text(
                             'No, No tengo testigos',
                             style: TextStyle(
                               fontSize: 17,
-                              color: Colors.white,
                             ),
                           ),
                         ],
@@ -237,10 +236,10 @@ class _Solicitud2State extends State<Solicitud2> {
                                 ),
                                 decoration: InputDecoration(
                                   filled: true,
-                                  fillColor: Colors.black.withOpacity(0.2),
+                                  fillColor: Colors.black.withOpacity(0.1),
                                   labelText: 'Nombre',
                                   labelStyle: const TextStyle(
-                                    color: Colors.white,
+                                    color: Colors.black54,
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -262,10 +261,10 @@ class _Solicitud2State extends State<Solicitud2> {
                                 ),
                                 decoration: InputDecoration(
                                   filled: true,
-                                  fillColor: Colors.black.withOpacity(0.2),
+                                  fillColor: Colors.black.withOpacity(0.1),
                                   labelText: 'Apellido',
                                   labelStyle: const TextStyle(
-                                    color: Colors.white,
+                                    color: Colors.black54,
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -287,10 +286,10 @@ class _Solicitud2State extends State<Solicitud2> {
                                 ),
                                 decoration: InputDecoration(
                                   filled: true,
-                                  fillColor: Colors.black.withOpacity(0.2),
+                                  fillColor: Colors.black.withOpacity(0.1),
                                   labelText: 'Telefono',
                                   labelStyle: const TextStyle(
-                                    color: Colors.white,
+                                    color: Colors.black54,
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -305,21 +304,29 @@ class _Solicitud2State extends State<Solicitud2> {
                         ],
                       ),
                       const SizedBox(height: 40),
+                      const Text(
+                        'Que relacion tiene con el tetsigo? Comience a escribir la relacion y seleccione las correcta.',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.black,
+                        ),
+                      ),
+                      const SizedBox(height: 40),
                       Container(
                         margin: const EdgeInsets.symmetric(horizontal: 0),
                         child: TextField(
                           textAlign: TextAlign.center,
-                          maxLines: 10,
+                          maxLines: 2,
                           style: const TextStyle(
                             fontSize: 18.5,
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
                           decoration: InputDecoration(
                             filled: true,
-                            fillColor: Colors.black.withOpacity(0.2),
-                            labelText: 'Escribe las pruebas que posee.',
+                            fillColor: Colors.black.withOpacity(0.1),
+                            labelText: 'Relacion con la persona',
                             labelStyle: const TextStyle(
-                              color: Colors.white,
+                              color: Colors.black54,
                               fontSize: 18,
                               fontWeight: FontWeight.w500,
                             ),
@@ -331,29 +338,21 @@ class _Solicitud2State extends State<Solicitud2> {
                         ),
                       ),
                       const SizedBox(height: 40),
-                      const Text(
-                        'Que relacion tiene con el tetsigo? Comience a escribir la relacion y seleccione las correcta.',
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: Colors.white70,
-                        ),
-                      ),
-                      const SizedBox(height: 40),
                       Container(
                         margin: const EdgeInsets.symmetric(horizontal: 0),
                         child: TextField(
                           textAlign: TextAlign.center,
-                          maxLines: 2,
+                          maxLines: 10,
                           style: const TextStyle(
                             fontSize: 18.5,
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
                           decoration: InputDecoration(
                             filled: true,
-                            fillColor: Colors.black.withOpacity(0.2),
-                            labelText: 'Escribe las pruebas que posee.',
+                            fillColor: Colors.black.withOpacity(0.1),
+                            labelText: 'Que fue lo que sucedio?',
                             labelStyle: const TextStyle(
-                              color: Colors.white,
+                              color: Colors.black54,
                               fontSize: 18,
                               fontWeight: FontWeight.w500,
                             ),
@@ -375,7 +374,7 @@ class _Solicitud2State extends State<Solicitud2> {
                             ),
                           ),
                           child: const Text(
-                            'Siguiente',
+                            'Enviar',
                             style: TextStyle(
                               fontSize: 20,
                             ),

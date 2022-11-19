@@ -1,3 +1,4 @@
+import 'package:fiscal/pages/Dashboard.dart';
 import 'package:fiscal/pages/Login.dart';
 import 'package:fiscal/pages/SignUp.dart';
 import 'package:fiscal/pages/Solicitud.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatelessWidget {
         '/SignUp': (context) => SignUp(),
         '/Solicitud': (context) => Solicitud(),
         '/Solicitud2': (context) => Solicitud2(),
+        '/Dashboard': (context) => const Dashboard(),
       },
     );
   }

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Login extends StatefulWidget {
-  Login({Key? key}) : super(key: key);
+class Dashboard extends StatefulWidget {
+  const Dashboard({Key? key}) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Dashboard> createState() => _DashboardState();
 }
 
-class _LoginState extends State<Login> {
+class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -96,121 +96,107 @@ class _LoginState extends State<Login> {
                 ),
                 Container(
                   height: 900,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.7),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 40,
+                    vertical: 40,
                   ),
-                  child: Container(
-                    height: 500,
-                    width: 500,
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 100, 100, 100)
-                          .withOpacity(0.8),
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: const [
-                        BoxShadow(
-                          blurRadius: 10,
-                          color: Colors.black12,
-                          offset: Offset(0, 0),
-                        ),
-                      ],
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        const Text(
-                          'Login',
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.99),
+                  ),
+                  child: DataTable(
+                    columns: const [
+                      DataColumn(
+                        label: Text(
+                          'No. Solicitud',
                           style: TextStyle(
-                            fontSize: 45,
-                            color: Colors.white,
                             fontWeight: FontWeight.w700,
+                            fontSize: 14,
                           ),
                         ),
-                        Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 60),
-                          child: TextField(
-                            style: const TextStyle(
-                              fontSize: 18.5,
-                              color: Colors.white,
+                      ),
+                      DataColumn(
+                        label: Text(
+                          'Tipo de solicitud',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          'Tipo de prueba',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          'Fecha de solcitud',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          'Estado',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ),
+                      DataColumn(
+                        label: Text(
+                          '',
+                        ),
+                      ),
+                    ],
+                    rows: [
+                      for (int i = 0; i < 5; i++)
+                        DataRow(
+                          cells: [
+                            const DataCell(
+                              Text('#4039'),
                             ),
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.black.withOpacity(0.2),
-                              labelText: 'User',
-                              labelStyle: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
+                            DataCell(
+                              Text('Tipo $i'),
+                            ),
+                            const DataCell(
+                              Text('Manual'),
+                            ),
+                            DataCell(
+                              Text(
+                                  '${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}'),
+                            ),
+                            const DataCell(
+                              Text('Aceptado'),
+                            ),
+                            DataCell(
+                              Row(
+                                children: [
+                                  ElevatedButton(
+                                    child: const Text('Aceptar'),
+                                    onPressed: () {},
+                                  ),
+                                  const SizedBox(width: 10),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.red,
+                                    ),
+                                    child: const Text('Negar'),
+                                    onPressed: () {},
+                                  ),
+                                ],
                               ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide.none,
-                              ),
                             ),
-                          ),
+                          ],
                         ),
-                        Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 60),
-                          child: TextField(
-                            obscureText: true,
-                            style: const TextStyle(
-                              fontSize: 18.5,
-                              color: Colors.white,
-                            ),
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.black.withOpacity(0.2),
-                              labelText: 'Password',
-                              labelStyle: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide.none,
-                              ),
-                            ),
-                          ),
-                        ),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green.withOpacity(0.5),
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 15,
-                              horizontal: 25,
-                            ),
-                          ),
-                          child: const Text(
-                            'Login',
-                            style: TextStyle(
-                              fontSize: 20,
-                            ),
-                          ),
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/Dashboard');
-                          },
-                        ),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blueGrey.withOpacity(0.7),
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 15,
-                              horizontal: 25,
-                            ),
-                          ),
-                          child: const Text(
-                            'Sign Up',
-                            style: TextStyle(
-                              fontSize: 20,
-                            ),
-                          ),
-                          onPressed: () {
-                            Navigator.popAndPushNamed(context, '/SignUp');
-                          },
-                        ),
-                      ],
-                    ),
+                    ],
                   ),
                 ),
                 Container(

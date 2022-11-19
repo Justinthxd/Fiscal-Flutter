@@ -103,89 +103,96 @@ class _SolicitudState extends State<Solicitud> {
                   height: 1500,
                   alignment: Alignment.center,
                   padding: EdgeInsets.symmetric(
-                      vertical: 30, horizontal: size.width * 0.3),
+                      vertical: 30, horizontal: size.width * 0.25),
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade900.withOpacity(0.99),
+                    color: Colors.white.withOpacity(0.99),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 30),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Container(
-                            height: 300,
-                            width: 300,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.grey.shade900.withOpacity(1),
-                              boxShadow: [
-                                const BoxShadow(
-                                  blurRadius: 10,
-                                  color: Colors.black54,
-                                  offset: Offset(0, 0),
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              children: [
-                                const Spacer(),
-                                Icon(
-                                  Icons.person_remove_rounded,
-                                  size: 200,
-                                  color: Colors.red.withOpacity(0.6),
-                                ),
-                                const Spacer(),
-                                TextButton(
-                                  onPressed: () {},
-                                  child: const Text(
-                                    'SOY LA PERSONA AFECTADA',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
+                          Expanded(
+                            child: Container(
+                              height: 250,
+                              width: 200,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.white.withOpacity(1),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    blurRadius: 10,
+                                    color: Colors.black12,
+                                    offset: Offset(0, 0),
+                                  ),
+                                ],
+                              ),
+                              child: Column(
+                                children: [
+                                  const Spacer(),
+                                  Icon(
+                                    Icons.person_remove_rounded,
+                                    size: 100,
+                                    color: Colors.red.withOpacity(0.6),
+                                  ),
+                                  const Spacer(),
+                                  Center(
+                                    child: TextButton(
+                                      onPressed: () {},
+                                      child: const Text(
+                                        'PERSONA AFECTADA',
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                ),
-                                const SizedBox(height: 20),
-                              ],
+                                  const SizedBox(height: 20),
+                                ],
+                              ),
                             ),
                           ),
-                          Container(
-                            height: 300,
-                            width: 300,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.grey.shade900.withOpacity(1),
-                              boxShadow: [
-                                const BoxShadow(
-                                  blurRadius: 10,
-                                  color: Colors.black54,
-                                  offset: Offset(0, 0),
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              children: [
-                                const Spacer(),
-                                Icon(
-                                  Icons.person_add_rounded,
-                                  size: 200,
-                                  color: Colors.green.withOpacity(0.6),
-                                ),
-                                const Spacer(),
-                                TextButton(
-                                  onPressed: () {},
-                                  child: const Text(
-                                    'SOY QUIEN DENUNCIA',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 20,
+                          SizedBox(width: size.width * 0.05),
+                          Expanded(
+                            child: Container(
+                              height: 250,
+                              width: 200,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.white.withOpacity(1),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    blurRadius: 10,
+                                    color: Colors.black12,
+                                    offset: Offset(0, 0),
+                                  ),
+                                ],
+                              ),
+                              child: Column(
+                                children: [
+                                  const Spacer(),
+                                  Icon(
+                                    Icons.person_add_rounded,
+                                    size: 100,
+                                    color: Colors.green.withOpacity(0.6),
+                                  ),
+                                  const Spacer(),
+                                  TextButton(
+                                    onPressed: () {},
+                                    child: const Text(
+                                      'SOY QUIEN DENUNCIA',
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
-                                ),
-                                const SizedBox(height: 20),
-                              ],
+                                  const SizedBox(height: 20),
+                                ],
+                              ),
                             ),
                           ),
                         ],
@@ -203,7 +210,7 @@ class _SolicitudState extends State<Solicitud> {
                         'Aqui podras brindar mas datos de la persona afectada, recuerde que los campos marcados con * son obligatorios.',
                         style: TextStyle(
                           fontSize: 20,
-                          color: Colors.white70,
+                          color: Colors.black,
                         ),
                       ),
                       const SizedBox(height: 40),
@@ -213,14 +220,14 @@ class _SolicitudState extends State<Solicitud> {
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             fontSize: 18.5,
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
                           decoration: InputDecoration(
                             filled: true,
-                            fillColor: Colors.black.withOpacity(0.2),
+                            fillColor: Colors.black.withOpacity(0.1),
                             labelText: 'Nombre',
                             labelStyle: const TextStyle(
-                              color: Colors.white,
+                              color: Colors.black54,
                               fontSize: 18,
                               fontWeight: FontWeight.w500,
                             ),
@@ -238,14 +245,14 @@ class _SolicitudState extends State<Solicitud> {
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             fontSize: 18.5,
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
                           decoration: InputDecoration(
                             filled: true,
-                            fillColor: Colors.black.withOpacity(0.2),
+                            fillColor: Colors.black.withOpacity(0.1),
                             labelText: 'Apellido',
                             labelStyle: const TextStyle(
-                              color: Colors.white,
+                              color: Colors.black54,
                               fontSize: 18,
                               fontWeight: FontWeight.w500,
                             ),
@@ -263,14 +270,14 @@ class _SolicitudState extends State<Solicitud> {
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             fontSize: 18.5,
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
                           decoration: InputDecoration(
                             filled: true,
-                            fillColor: Colors.black.withOpacity(0.2),
+                            fillColor: Colors.black.withOpacity(0.1),
                             labelText: 'Numero de Telefono',
                             labelStyle: const TextStyle(
-                              color: Colors.white,
+                              color: Colors.black54,
                               fontSize: 18,
                               fontWeight: FontWeight.w500,
                             ),
@@ -289,14 +296,14 @@ class _SolicitudState extends State<Solicitud> {
                           maxLines: 10,
                           style: const TextStyle(
                             fontSize: 18.5,
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
                           decoration: InputDecoration(
                             filled: true,
-                            fillColor: Colors.black.withOpacity(0.2),
-                            labelText: 'Aqui puedes dar mas detalles.',
+                            fillColor: Colors.black.withOpacity(0.1),
+                            labelText: 'Aqui puedes dar mas detalles. . .',
                             labelStyle: const TextStyle(
-                              color: Colors.white,
+                              color: Colors.black54,
                               fontSize: 18,
                               fontWeight: FontWeight.w500,
                             ),
@@ -320,7 +327,7 @@ class _SolicitudState extends State<Solicitud> {
                         'Los campos marcados con * son obligatorios.',
                         style: TextStyle(
                           fontSize: 20,
-                          color: Colors.white70,
+                          color: Colors.black,
                         ),
                       ),
                       const SizedBox(height: 40),
@@ -336,10 +343,10 @@ class _SolicitudState extends State<Solicitud> {
                                 ),
                                 decoration: InputDecoration(
                                   filled: true,
-                                  fillColor: Colors.black.withOpacity(0.2),
+                                  fillColor: Colors.black.withOpacity(0.1),
                                   labelText: 'Fecha',
                                   labelStyle: const TextStyle(
-                                    color: Colors.white,
+                                    color: Colors.black54,
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -351,7 +358,7 @@ class _SolicitudState extends State<Solicitud> {
                                     icon: const Icon(
                                       Icons.calendar_month_rounded,
                                       size: 23,
-                                      color: Colors.white,
+                                      color: Colors.black,
                                     ),
                                     onPressed: () {},
                                   ),
@@ -369,10 +376,10 @@ class _SolicitudState extends State<Solicitud> {
                                 ),
                                 decoration: InputDecoration(
                                   filled: true,
-                                  fillColor: Colors.black.withOpacity(0.2),
+                                  fillColor: Colors.black.withOpacity(0.1),
                                   labelText: 'Hora',
                                   labelStyle: const TextStyle(
-                                    color: Colors.white,
+                                    color: Colors.black54,
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -384,7 +391,7 @@ class _SolicitudState extends State<Solicitud> {
                                     icon: const Icon(
                                       Icons.alarm_rounded,
                                       size: 23,
-                                      color: Colors.white,
+                                      color: Colors.black,
                                     ),
                                     onPressed: () {},
                                   ),
