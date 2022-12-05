@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
-  Home({Key? key}) : super(key: key);
+  const Home({Key? key}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
@@ -18,7 +18,7 @@ class _HomeState extends State<Home> {
         decoration: const BoxDecoration(),
         child: Stack(
           children: [
-            Container(
+            SizedBox(
               height: size.height,
               width: size.width,
               child: Image.asset(

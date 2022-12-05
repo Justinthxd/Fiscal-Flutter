@@ -8,6 +8,10 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  List<TextEditingController> controllers = [
+    for (int i = 0; i < 4; i++) TextEditingController()
+  ];
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -18,7 +22,7 @@ class _LoginState extends State<Login> {
         decoration: const BoxDecoration(),
         child: Stack(
           children: [
-            Container(
+            SizedBox(
               height: size.height,
               width: size.width,
               child: Image.asset(
@@ -129,6 +133,7 @@ class _LoginState extends State<Login> {
                         Container(
                           margin: const EdgeInsets.symmetric(horizontal: 60),
                           child: TextField(
+                            controller: controllers[0],
                             style: const TextStyle(
                               fontSize: 18.5,
                               color: Colors.white,
@@ -152,6 +157,7 @@ class _LoginState extends State<Login> {
                         Container(
                           margin: const EdgeInsets.symmetric(horizontal: 60),
                           child: TextField(
+                            controller: controllers[1],
                             obscureText: true,
                             style: const TextStyle(
                               fontSize: 18.5,

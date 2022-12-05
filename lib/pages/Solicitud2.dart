@@ -1,4 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fiscal/provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Solicitud2 extends StatefulWidget {
   Solicitud2({Key? key}) : super(key: key);
@@ -8,15 +11,19 @@ class Solicitud2 extends StatefulWidget {
 }
 
 class _Solicitud2State extends State<Solicitud2> {
-  String groupValue = 'Empty';
+  String groupPruebas = '';
+  String groupTestigos = '';
 
   bool groupBool = false;
 
   PageController page = PageController();
 
+  final fireStore = FirebaseFirestore.instance;
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final main = Provider.of<MainProvider>(context);
     return Scaffold(
       body: Container(
         height: size.height,
@@ -126,10 +133,14 @@ class _Solicitud2State extends State<Solicitud2> {
                       Row(
                         children: [
                           Radio(
-                            value: '',
-                            activeColor: Colors.amber,
-                            groupValue: true,
-                            onChanged: (value) {},
+                            value: 'tengo pruebas',
+                            activeColor: Colors.black,
+                            groupValue: groupPruebas,
+                            onChanged: (value) {
+                              groupPruebas = value!;
+                              main.setPruebas = value;
+                              setState(() {});
+                            },
                           ),
                           const Text(
                             'Si, Tengo pruebas',
@@ -143,10 +154,14 @@ class _Solicitud2State extends State<Solicitud2> {
                       Row(
                         children: [
                           Radio(
-                            value: '',
-                            activeColor: Colors.amber,
-                            groupValue: true,
-                            onChanged: (value) {},
+                            value: 'no tengo pruebas',
+                            activeColor: Colors.black,
+                            groupValue: groupPruebas,
+                            onChanged: (value) {
+                              groupPruebas = value!;
+                              main.setPruebas = value;
+                              setState(() {});
+                            },
                           ),
                           const Text(
                             'No, No tengo pruebas',
@@ -160,6 +175,7 @@ class _Solicitud2State extends State<Solicitud2> {
                       Container(
                         margin: const EdgeInsets.symmetric(horizontal: 0),
                         child: TextField(
+                          controller: main.getControllers[6],
                           textAlign: TextAlign.center,
                           maxLines: 10,
                           style: const TextStyle(
@@ -193,10 +209,14 @@ class _Solicitud2State extends State<Solicitud2> {
                       Row(
                         children: [
                           Radio(
-                            value: '',
-                            activeColor: Colors.amber,
-                            groupValue: true,
-                            onChanged: (value) {},
+                            value: 'tengo testigos',
+                            activeColor: Colors.black,
+                            groupValue: groupTestigos,
+                            onChanged: (value) {
+                              groupTestigos = value!;
+                              main.setTestigos = value;
+                              setState(() {});
+                            },
                           ),
                           const Text(
                             'Si, Tengo testigos',
@@ -210,10 +230,14 @@ class _Solicitud2State extends State<Solicitud2> {
                       Row(
                         children: [
                           Radio(
-                            value: '',
-                            activeColor: Colors.amber,
-                            groupValue: true,
-                            onChanged: (value) {},
+                            value: 'no tengo testigos',
+                            activeColor: Colors.black,
+                            groupValue: groupTestigos,
+                            onChanged: (value) {
+                              groupTestigos = value!;
+                              main.setTestigos = value;
+                              setState(() {});
+                            },
                           ),
                           const Text(
                             'No, No tengo testigos',
@@ -231,6 +255,7 @@ class _Solicitud2State extends State<Solicitud2> {
                               margin:
                                   const EdgeInsets.symmetric(horizontal: 20),
                               child: TextField(
+                                controller: main.getControllers[7],
                                 style: const TextStyle(
                                   fontSize: 18.5,
                                 ),
@@ -256,6 +281,7 @@ class _Solicitud2State extends State<Solicitud2> {
                               margin:
                                   const EdgeInsets.symmetric(horizontal: 20),
                               child: TextField(
+                                controller: main.getControllers[8],
                                 style: const TextStyle(
                                   fontSize: 18.5,
                                 ),
@@ -281,6 +307,7 @@ class _Solicitud2State extends State<Solicitud2> {
                               margin:
                                   const EdgeInsets.symmetric(horizontal: 20),
                               child: TextField(
+                                controller: main.getControllers[9],
                                 style: const TextStyle(
                                   fontSize: 18.5,
                                 ),
@@ -315,6 +342,7 @@ class _Solicitud2State extends State<Solicitud2> {
                       Container(
                         margin: const EdgeInsets.symmetric(horizontal: 0),
                         child: TextField(
+                          controller: main.getControllers[10],
                           textAlign: TextAlign.center,
                           maxLines: 2,
                           style: const TextStyle(
@@ -341,6 +369,7 @@ class _Solicitud2State extends State<Solicitud2> {
                       Container(
                         margin: const EdgeInsets.symmetric(horizontal: 0),
                         child: TextField(
+                          controller: main.getControllers[11],
                           textAlign: TextAlign.center,
                           maxLines: 10,
                           style: const TextStyle(
@@ -380,7 +409,23 @@ class _Solicitud2State extends State<Solicitud2> {
                             ),
                           ),
                           onPressed: () {
-                            print(groupValue);
+                            fireStore.collection('solicitudes').add({
+                              'option': main.getOption,
+                              'name': main.controllers[0].text,
+                              'lastName': main.controllers[1].text,
+                              'phone': main.controllers[2].text,
+                              'notes': main.controllers[3].text,
+                              'date': main.controllers[4].text,
+                              'time': main.controllers[5].text,
+                              'pruebas': main.getPruebas,
+                              'testigos': main.getTestigos,
+                              'notes2': main.controllers[6].text,
+                              'nameTestigo': main.controllers[7].text,
+                              'lastNameTestigo': main.controllers[8].text,
+                              'phoneTestigo': main.controllers[9].text,
+                              'relationship': main.controllers[10].text,
+                              'notes3': main.controllers[11].text,
+                            });
                           },
                         ),
                       ),

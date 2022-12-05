@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatefulWidget {
@@ -8,6 +9,14 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  final fireStore = FirebaseFirestore.instance;
+
+  Future getData() async {
+    final res = await fireStore.collection("solicitudes").get();
+
+    return res.docs;
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -66,6 +75,15 @@ class _DashboardState extends State<Dashboard> {
                         ),
                       ),
                       const Spacer(),
+                      IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.refresh_rounded,
+                          size: 30,
+                          color: Colors.white38,
+                        ),
+                      ),
+                      const SizedBox(width: 20),
                       GestureDetector(
                         onTap: () {},
                         child: const Text(
@@ -103,100 +121,110 @@ class _DashboardState extends State<Dashboard> {
                   decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.99),
                   ),
-                  child: DataTable(
-                    columns: const [
-                      DataColumn(
-                        label: Text(
-                          'No. Solicitud',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 14,
-                          ),
-                        ),
-                      ),
-                      DataColumn(
-                        label: Text(
-                          'Tipo de solicitud',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 14,
-                          ),
-                        ),
-                      ),
-                      DataColumn(
-                        label: Text(
-                          'Tipo de prueba',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 14,
-                          ),
-                        ),
-                      ),
-                      DataColumn(
-                        label: Text(
-                          'Fecha de solcitud',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 14,
-                          ),
-                        ),
-                      ),
-                      DataColumn(
-                        label: Text(
-                          'Estado',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 14,
-                          ),
-                        ),
-                      ),
-                      DataColumn(
-                        label: Text(
-                          '',
-                        ),
-                      ),
-                    ],
-                    rows: [
-                      for (int i = 0; i < 5; i++)
-                        DataRow(
-                          cells: [
-                            const DataCell(
-                              Text('#4039'),
+                  child: FutureBuilder(
+                    future: getData(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return DataTable(
+                          columns: const [
+                            DataColumn(
+                              label: Text(
+                                'No. Solicitud',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 14,
+                                ),
+                              ),
                             ),
-                            DataCell(
-                              Text('Tipo $i'),
+                            DataColumn(
+                              label: Text(
+                                'Tipo de solicitud',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 14,
+                                ),
+                              ),
                             ),
-                            const DataCell(
-                              Text('Manual'),
+                            DataColumn(
+                              label: Text(
+                                'Tipo de prueba',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 14,
+                                ),
+                              ),
                             ),
-                            DataCell(
-                              Text(
-                                  '${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}'),
+                            DataColumn(
+                              label: Text(
+                                'Fecha de solcitud',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 14,
+                                ),
+                              ),
                             ),
-                            const DataCell(
-                              Text('Aceptado'),
+                            DataColumn(
+                              label: Text(
+                                'Estado',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 14,
+                                ),
+                              ),
                             ),
-                            DataCell(
-                              Row(
-                                children: [
-                                  ElevatedButton(
-                                    child: const Text('Aceptar'),
-                                    onPressed: () {},
-                                  ),
-                                  const SizedBox(width: 10),
-                                  ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.red,
-                                    ),
-                                    child: const Text('Negar'),
-                                    onPressed: () {},
-                                  ),
-                                ],
+                            DataColumn(
+                              label: Text(
+                                '',
                               ),
                             ),
                           ],
-                        ),
-                    ],
+                          rows: [
+                            for (int i = 0; i < snapshot.data.length; i++)
+                              DataRow(
+                                cells: [
+                                  DataCell(
+                                    Text('#$i'),
+                                  ),
+                                  const DataCell(
+                                    Text('Orden General'),
+                                  ),
+                                  const DataCell(
+                                    Text('Sistematica'),
+                                  ),
+                                  DataCell(
+                                    Text('${snapshot.data[i].data()['date']}'),
+                                  ),
+                                  const DataCell(
+                                    Text('Aceptado'),
+                                  ),
+                                  DataCell(
+                                    Row(
+                                      children: [
+                                        ElevatedButton(
+                                          child: const Text('Aceptar'),
+                                          onPressed: () {},
+                                        ),
+                                        const SizedBox(width: 10),
+                                        ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.red,
+                                          ),
+                                          child: const Text('Negar'),
+                                          onPressed: () {},
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                          ],
+                        );
+                      } else {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                    },
                   ),
                 ),
                 Container(

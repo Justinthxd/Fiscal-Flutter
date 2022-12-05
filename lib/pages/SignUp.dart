@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
@@ -8,6 +9,12 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  List<TextEditingController> controllers = [
+    for (int i = 0; i < 4; i++) TextEditingController()
+  ];
+
+  final fireStore = FirebaseFirestore.instance;
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -129,6 +136,7 @@ class _SignUpState extends State<SignUp> {
                         Container(
                           margin: const EdgeInsets.symmetric(horizontal: 60),
                           child: TextField(
+                            controller: controllers[0],
                             style: const TextStyle(
                               fontSize: 18.5,
                               color: Colors.white,
@@ -152,6 +160,7 @@ class _SignUpState extends State<SignUp> {
                         Container(
                           margin: const EdgeInsets.symmetric(horizontal: 60),
                           child: TextField(
+                            controller: controllers[1],
                             style: const TextStyle(
                               fontSize: 18.5,
                               color: Colors.white,
@@ -175,6 +184,7 @@ class _SignUpState extends State<SignUp> {
                         Container(
                           margin: const EdgeInsets.symmetric(horizontal: 60),
                           child: TextField(
+                            controller: controllers[2],
                             obscureText: true,
                             style: const TextStyle(
                               fontSize: 18.5,
@@ -199,6 +209,7 @@ class _SignUpState extends State<SignUp> {
                         Container(
                           margin: const EdgeInsets.symmetric(horizontal: 60),
                           child: TextField(
+                            controller: controllers[3],
                             obscureText: true,
                             style: const TextStyle(
                               fontSize: 18.5,
@@ -234,7 +245,17 @@ class _SignUpState extends State<SignUp> {
                               fontSize: 20,
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            fireStore.collection('users').add({
+                              'name': controllers[0].text,
+                              'email': controllers[1].text,
+                              'password': controllers[2].text,
+                            });
+                            controllers[0].text = '';
+                            controllers[1].text = '';
+                            controllers[2].text = '';
+                            setState(() {});
+                          },
                         ),
                       ],
                     ),

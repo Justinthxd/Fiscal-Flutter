@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "71145577143",
+    "project_id": "fiscal-81d65",
+    "storage_bucket": "fiscal-81d65.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:71145577143:android:66ec9e14c8b4a18d774b32",
+        "android_client_info": {
+          "package_name": "com.example.fiscal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "71145577143-9d0bkv4i00rugm92li6splvnc5ochnu6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSCMx9mDidsP89tsD7psZHP2GGkBZmF3g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "71145577143-9d0bkv4i00rugm92li6splvnc5ochnu6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

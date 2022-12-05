@@ -1,4 +1,6 @@
+import 'package:fiscal/provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Solicitud extends StatefulWidget {
   Solicitud({Key? key}) : super(key: key);
@@ -8,15 +10,10 @@ class Solicitud extends StatefulWidget {
 }
 
 class _SolicitudState extends State<Solicitud> {
-  String groupValue = 'Empty';
-
-  bool groupBool = false;
-
-  PageController page = PageController();
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final main = Provider.of<MainProvider>(context);
     return Scaffold(
       body: Container(
         height: size.height,
@@ -24,7 +21,7 @@ class _SolicitudState extends State<Solicitud> {
         decoration: const BoxDecoration(),
         child: Stack(
           children: [
-            Container(
+            SizedBox(
               height: size.height,
               width: size.width,
               child: Image.asset(
@@ -139,7 +136,11 @@ class _SolicitudState extends State<Solicitud> {
                                   const Spacer(),
                                   Center(
                                     child: TextButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        main.setOption = 0;
+                                        print('Selected');
+                                        setState(() {});
+                                      },
                                       child: const Text(
                                         'PERSONA AFECTADA',
                                         style: TextStyle(
@@ -181,7 +182,11 @@ class _SolicitudState extends State<Solicitud> {
                                   ),
                                   const Spacer(),
                                   TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      main.setOption = 1;
+                                      print('Selected');
+                                      setState(() {});
+                                    },
                                     child: const Text(
                                       'SOY QUIEN DENUNCIA',
                                       style: TextStyle(
@@ -217,6 +222,7 @@ class _SolicitudState extends State<Solicitud> {
                       Container(
                         margin: const EdgeInsets.symmetric(horizontal: 50),
                         child: TextField(
+                          controller: main.getControllers[0],
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             fontSize: 18.5,
@@ -242,6 +248,7 @@ class _SolicitudState extends State<Solicitud> {
                       Container(
                         margin: const EdgeInsets.symmetric(horizontal: 50),
                         child: TextField(
+                          controller: main.getControllers[1],
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             fontSize: 18.5,
@@ -267,6 +274,7 @@ class _SolicitudState extends State<Solicitud> {
                       Container(
                         margin: const EdgeInsets.symmetric(horizontal: 50),
                         child: TextField(
+                          controller: main.getControllers[2],
                           textAlign: TextAlign.center,
                           style: const TextStyle(
                             fontSize: 18.5,
@@ -292,6 +300,7 @@ class _SolicitudState extends State<Solicitud> {
                       Container(
                         margin: const EdgeInsets.symmetric(horizontal: 50),
                         child: TextField(
+                          controller: main.getControllers[3],
                           textAlign: TextAlign.center,
                           maxLines: 10,
                           style: const TextStyle(
@@ -338,6 +347,7 @@ class _SolicitudState extends State<Solicitud> {
                               margin:
                                   const EdgeInsets.symmetric(horizontal: 20),
                               child: TextField(
+                                controller: main.getControllers[4],
                                 style: const TextStyle(
                                   fontSize: 18.5,
                                 ),
@@ -360,7 +370,24 @@ class _SolicitudState extends State<Solicitud> {
                                       size: 23,
                                       color: Colors.black,
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () async {
+                                      await showDatePicker(
+                                        context: context,
+                                        initialDate:
+                                            DateTime.now(), //get today's date
+                                        firstDate: DateTime(
+                                            2000), //DateTime.now() - not to allow to choose before today.
+                                        lastDate: DateTime(2101),
+                                      ).then((value) {
+                                        main.setControllers(
+                                          4,
+                                          TextEditingController(
+                                            text:
+                                                ('${value!.day}/${value.month}/${value.year}'),
+                                          ),
+                                        );
+                                      });
+                                    },
                                   ),
                                 ),
                               ),
@@ -371,6 +398,7 @@ class _SolicitudState extends State<Solicitud> {
                               margin:
                                   const EdgeInsets.symmetric(horizontal: 20),
                               child: TextField(
+                                controller: main.getControllers[5],
                                 style: const TextStyle(
                                   fontSize: 18.5,
                                 ),
@@ -393,7 +421,20 @@ class _SolicitudState extends State<Solicitud> {
                                       size: 23,
                                       color: Colors.black,
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () async {
+                                      await showTimePicker(
+                                        context: context,
+                                        initialTime: TimeOfDay.now(),
+                                      ).then((value) {
+                                        main.setControllers(
+                                          5,
+                                          TextEditingController(
+                                            text:
+                                                ('${value!.hour} : ${value.minute}'),
+                                          ),
+                                        );
+                                      });
+                                    },
                                   ),
                                 ),
                               ),
