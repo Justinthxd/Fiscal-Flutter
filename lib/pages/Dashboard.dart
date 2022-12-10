@@ -85,7 +85,9 @@ class _DashboardState extends State<Dashboard> {
                       ),
                       const SizedBox(width: 20),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.popAndPushNamed(context, '/Login');
+                        },
                         child: const Text(
                           'Login',
                           style: TextStyle(

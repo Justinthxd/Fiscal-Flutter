@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -11,6 +12,14 @@ class _LoginState extends State<Login> {
   List<TextEditingController> controllers = [
     for (int i = 0; i < 4; i++) TextEditingController()
   ];
+
+  Future getData() async {
+    final res = await fireStore.collection("users").get();
+
+    return res.docs;
+  }
+
+  final fireStore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +46,6 @@ class _LoginState extends State<Login> {
                   height: 60,
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   decoration: BoxDecoration(
-                    // color: Colors.white,
                     color: Colors.grey[900],
                   ),
                   child: Row(
@@ -141,7 +149,7 @@ class _LoginState extends State<Login> {
                             decoration: InputDecoration(
                               filled: true,
                               fillColor: Colors.black.withOpacity(0.2),
-                              labelText: 'User',
+                              labelText: 'Email',
                               labelStyle: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
@@ -194,7 +202,19 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                           onPressed: () {
-                            Navigator.pushNamed(context, '/Dashboard');
+                            getData().then((value) {
+                              value.forEach((value) {
+                                if (value.data()['email'].toString().trim() ==
+                                        controllers[0].text.trim() &&
+                                    value
+                                            .data()['password']
+                                            .toString()
+                                            .trim() ==
+                                        controllers[1].text.trim()) {
+                                  Navigator.pushNamed(context, '/Dashboard');
+                                }
+                              });
+                            });
                           },
                         ),
                         ElevatedButton(

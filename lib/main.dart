@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Fiscal',
-        initialRoute: '/Dashboard',
+        initialRoute: '/',
         routes: {
           '/': (context) => const Home(),
           '/Login': (context) => Login(),

@@ -25,7 +25,7 @@ class _SignUpState extends State<SignUp> {
         decoration: const BoxDecoration(),
         child: Stack(
           children: [
-            Container(
+            SizedBox(
               height: size.height,
               width: size.width,
               child: Image.asset(
