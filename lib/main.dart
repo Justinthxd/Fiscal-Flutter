@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fiscal/pages/Dashboard.dart';
 import 'package:fiscal/pages/Login.dart';
@@ -15,6 +17,12 @@ import 'pages/Home.dart';
 late Box box;
 
 Future main() async {
+  // if (!Platform.isWindows && !Platform.isAndroid) {
+  //   // Android-specific code
+  //   await Firebase.initializeApp(
+  //     options: DefaultFirebaseOptions.currentPlatform,
+  //   );
+  // }
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );

@@ -259,6 +259,52 @@ class _HomeState extends State<Home> {
                               ],
                             ),
                           ),
+                          Container(
+                            height: 300,
+                            width: 250,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: const [
+                                BoxShadow(
+                                  blurRadius: 5,
+                                  color: Colors.black26,
+                                  offset: Offset(0, 0),
+                                ),
+                              ],
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const Text(
+                                  'Step 4',
+                                  style: TextStyle(
+                                    color: Colors.black87,
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                                const Icon(
+                                  Icons.done_rounded,
+                                  size: 100,
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 30,
+                                  ),
+                                  child: const Text(
+                                    'You need to wait a minimum of 5 days for the response in your email with the information.',
+                                    style: TextStyle(
+                                      fontSize: 16.5,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     ],

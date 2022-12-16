@@ -30,6 +30,15 @@ class MainProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  String name = 'User';
+
+  String get getName => name;
+
+  set setName(String name) {
+    this.name = name;
+    notifyListeners();
+  }
+
   String pruebas = '';
 
   String get getPruebas => pruebas;

@@ -79,6 +79,7 @@ class _MyAppBarState extends State<MyAppBar> {
                     Navigator.pushNamed(context, '/');
                     box.put('isLogged', false);
                     box.put('isAdmin', false);
+                    main.setName = 'User';
                   },
                   child: const Text(
                     'Logout',
@@ -123,26 +124,16 @@ class _MyAppBarState extends State<MyAppBar> {
             color: Colors.grey[900],
             onSelected: (value) {},
             itemBuilder: (BuildContext context) => [
-              !isAdmin
-                  ? const PopupMenuItem(
-                      value: '',
-                      child: Text(
-                        'User',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    )
-                  : const PopupMenuItem(
-                      value: '',
-                      child: Text(
-                        'Justin',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-              !isAdmin
+              PopupMenuItem(
+                value: '',
+                child: Text(
+                  main.getName,
+                  style: const TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              !isLogged
                   ? const PopupMenuItem(
                       value: '',
                       child: Text(
@@ -161,7 +152,7 @@ class _MyAppBarState extends State<MyAppBar> {
                         ),
                       ),
                     ),
-              !isAdmin
+              !isLogged
                   ? const PopupMenuItem(
                       value: '',
                       child: Text(

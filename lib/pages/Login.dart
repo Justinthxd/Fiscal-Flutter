@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiscal/main.dart';
+import 'package:fiscal/provider/provider.dart';
 import 'package:fiscal/widgets/AppBar.dart';
 import 'package:fiscal/widgets/alerts.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
   Login({Key? key}) : super(key: key);
@@ -27,6 +29,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final main = Provider.of<MainProvider>(context);
     return Scaffold(
       body: Container(
         height: size.height,
@@ -173,6 +176,7 @@ class _LoginState extends State<Login> {
                                     } else {
                                       Navigator.pushNamed(context, '/');
                                     }
+                                    main.setName = controllers[0].text;
                                     box.put('isLogged', true);
                                     controllers[0].text = '';
                                     controllers[1].text = '';
