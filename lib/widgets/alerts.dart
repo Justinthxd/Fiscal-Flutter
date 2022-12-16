@@ -2,33 +2,37 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
-alertAccountValidated(BuildContext context) {
+alertAccountValidated(BuildContext context, [String? text]) {
   return showDialog(
     barrierDismissible: false,
     context: context,
     builder: (BuildContext context) {
       Timer(const Duration(milliseconds: 1700), () {
-        Navigator.pop(context);
-        Navigator.pushNamed(context, '/Login');
+        if (text != null) {
+          Navigator.pop(context);
+        } else {
+          Navigator.pop(context);
+          Navigator.pushNamed(context, '/Login');
+        }
       });
       return StatefulBuilder(
         builder: (context, setState) => AlertDialog(
           backgroundColor: const Color.fromRGBO(40, 40, 40, 1),
           content: Column(
             mainAxisSize: MainAxisSize.min,
-            children: const [
-              SizedBox(height: 50),
-              Center(
+            children: [
+              const SizedBox(height: 50),
+              const Center(
                 child: Icon(
                   Icons.done_rounded,
                   size: 100,
                   color: Colors.lightGreenAccent,
                 ),
               ),
-              SizedBox(height: 50),
+              const SizedBox(height: 50),
               Text(
-                'Account Created Successfully',
-                style: TextStyle(
+                text ?? 'Account Created Successfully',
+                style: const TextStyle(
                   fontSize: 20,
                   color: Colors.white,
                   fontWeight: FontWeight.w600,

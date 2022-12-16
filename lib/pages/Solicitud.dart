@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiscal/provider/provider.dart';
 import 'package:fiscal/widgets/AppBar.dart';
+import 'package:fiscal/widgets/alerts.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -725,6 +726,9 @@ class _SolicitudState extends State<Solicitud> {
                               'relationship': main.controllers[10].text,
                               'notes3': main.controllers[11].text,
                               'status': '0',
+                            }).then((value) {
+                              alertAccountValidated(
+                                  context, 'Was sent successfully');
                             });
                           },
                         ),

@@ -156,7 +156,7 @@ class _DashboardState extends State<Dashboard> {
                             ),
                             DataColumn(
                               label: Text(
-                                'Tipo de solicitud',
+                                'Nombre',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w700,
                                   fontSize: 14,
@@ -165,7 +165,7 @@ class _DashboardState extends State<Dashboard> {
                             ),
                             DataColumn(
                               label: Text(
-                                'Tipo de prueba',
+                                'Tipo',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w700,
                                   fontSize: 14,
@@ -203,11 +203,11 @@ class _DashboardState extends State<Dashboard> {
                                   DataCell(
                                     Text('#${i + 1}'),
                                   ),
-                                  const DataCell(
-                                    Text('Orden General'),
+                                  DataCell(
+                                    Text('${snapshot.data[i].data()['name']}'),
                                   ),
                                   const DataCell(
-                                    Text('Sistematica'),
+                                    Text('Online'),
                                   ),
                                   DataCell(
                                     Text('${snapshot.data[i].data()['date']}'),
