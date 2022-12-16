@@ -1,4 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fiscal/main.dart';
+import 'package:fiscal/widgets/AppBar.dart';
+import 'package:fiscal/widgets/alerts.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
@@ -42,70 +45,7 @@ class _LoginState extends State<Login> {
             ListView(
               physics: const BouncingScrollPhysics(),
               children: [
-                Container(
-                  height: 60,
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  decoration: BoxDecoration(
-                    color: Colors.grey[900],
-                  ),
-                  child: Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: const Text(
-                          'Home',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 20),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.popAndPushNamed(context, '/Solicitud');
-                        },
-                        child: const Text(
-                          'Solicitud',
-                          style: TextStyle(
-                            color: Colors.white60,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      const Spacer(),
-                      GestureDetector(
-                        onTap: () {},
-                        child: const Text(
-                          'Login',
-                          style: TextStyle(
-                            color: Colors.white60,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 20),
-                      GestureDetector(
-                        child: const Text(
-                          'Sign Up',
-                          style: TextStyle(
-                            color: Colors.white60,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        onTap: () {
-                          Navigator.popAndPushNamed(context, '/SignUp');
-                        },
-                      ),
-                    ],
-                  ),
-                ),
+                MyAppBar(),
                 Container(
                   height: 900,
                   alignment: Alignment.center,
@@ -202,19 +142,47 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                           onPressed: () {
-                            getData().then((value) {
-                              value.forEach((value) {
-                                if (value.data()['email'].toString().trim() ==
-                                        controllers[0].text.trim() &&
-                                    value
-                                            .data()['password']
-                                            .toString()
-                                            .trim() ==
-                                        controllers[1].text.trim()) {
-                                  Navigator.pushNamed(context, '/Dashboard');
+                            int aux = 0;
+                            if (controllers[0].text != '' &&
+                                controllers[1].text != '') {
+                              // - - - - //
+                              getData().then((value) {
+                                // - - - - //
+                                value.forEach((value) {
+                                  if (value.data()['email'].toString().trim() ==
+                                          controllers[0].text.trim() &&
+                                      value
+                                              .data()['password']
+                                              .toString()
+                                              .trim() ==
+                                          controllers[1].text.trim()) {
+                                    aux = 1;
+                                    if (value
+                                                .data()['email']
+                                                .toString()
+                                                .trim() ==
+                                            'root' &&
+                                        value
+                                                .data()['password']
+                                                .toString()
+                                                .trim() ==
+                                            'root') {
+                                      Navigator.pushNamed(
+                                          context, '/Dashboard');
+                                      box.put('isAdmin', true);
+                                    } else {
+                                      Navigator.pushNamed(context, '/');
+                                    }
+                                    box.put('isLogged', true);
+                                    controllers[0].text = '';
+                                    controllers[1].text = '';
+                                  }
+                                });
+                                if (aux == 0) {
+                                  alertError(context, 'User not found');
                                 }
                               });
-                            });
+                            }
                           },
                         ),
                         ElevatedButton(

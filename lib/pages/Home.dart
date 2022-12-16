@@ -1,3 +1,6 @@
+import 'package:fiscal/main.dart';
+import 'package:fiscal/widgets/AppBar.dart';
+import 'package:fiscal/widgets/alerts.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -29,70 +32,7 @@ class _HomeState extends State<Home> {
             ListView(
               physics: const BouncingScrollPhysics(),
               children: [
-                Container(
-                  height: 60,
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  decoration: BoxDecoration(
-                    color: Colors.grey[900],
-                  ),
-                  child: Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {},
-                        child: const Text(
-                          'Home',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 20),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, '/Solicitud');
-                        },
-                        child: const Text(
-                          'Solicitud',
-                          style: TextStyle(
-                            color: Colors.white60,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      const Spacer(),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, '/Login');
-                        },
-                        child: const Text(
-                          'Login',
-                          style: TextStyle(
-                            color: Colors.white60,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 20),
-                      GestureDetector(
-                        child: const Text(
-                          'Sign Up',
-                          style: TextStyle(
-                            color: Colors.white60,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        onTap: () {
-                          Navigator.pushNamed(context, '/SignUp');
-                        },
-                      ),
-                    ],
-                  ),
-                ),
+                MyAppBar(),
                 Container(
                   height: 700,
                   alignment: Alignment.center,
@@ -307,7 +247,13 @@ class _HomeState extends State<Home> {
                                     ),
                                   ),
                                   onPressed: () {
-                                    Navigator.pushNamed(context, '/Solicitud');
+                                    if (box.get('isLogged')) {
+                                      Navigator.pushNamed(
+                                          context, '/Solicitud');
+                                    } else {
+                                      alertError(
+                                          context, 'You need to be logged');
+                                    }
                                   },
                                 ),
                               ],

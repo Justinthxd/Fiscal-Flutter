@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fiscal/widgets/AppBar.dart';
+import 'package:fiscal/widgets/alerts.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {
@@ -10,7 +12,7 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   List<TextEditingController> controllers = [
-    for (int i = 0; i < 4; i++) TextEditingController()
+    for (int i = 0; i < 3; i++) TextEditingController()
   ];
 
   final fireStore = FirebaseFirestore.instance;
@@ -36,71 +38,7 @@ class _SignUpState extends State<SignUp> {
             ListView(
               physics: const BouncingScrollPhysics(),
               children: [
-                Container(
-                  height: 60,
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  decoration: BoxDecoration(
-                    // color: Colors.white,
-                    color: Colors.grey[900],
-                  ),
-                  child: Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: const Text(
-                          'Home',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 20),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.popAndPushNamed(context, '/Solicitud');
-                        },
-                        child: const Text(
-                          'Solicitud',
-                          style: TextStyle(
-                            color: Colors.white60,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      const Spacer(),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.popAndPushNamed(context, '/Login');
-                        },
-                        child: const Text(
-                          'Login',
-                          style: TextStyle(
-                            color: Colors.white60,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 20),
-                      GestureDetector(
-                        onTap: () {},
-                        child: const Text(
-                          'Sign Up',
-                          style: TextStyle(
-                            color: Colors.white60,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                MyAppBar(),
                 Container(
                   height: 900,
                   alignment: Alignment.center,
@@ -206,31 +144,6 @@ class _SignUpState extends State<SignUp> {
                             ),
                           ),
                         ),
-                        Container(
-                          margin: const EdgeInsets.symmetric(horizontal: 60),
-                          child: TextField(
-                            controller: controllers[3],
-                            obscureText: true,
-                            style: const TextStyle(
-                              fontSize: 18.5,
-                              color: Colors.white,
-                            ),
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.black.withOpacity(0.2),
-                              labelText: 'Confirm Password',
-                              labelStyle: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide.none,
-                              ),
-                            ),
-                          ),
-                        ),
                         ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.blueGrey.withOpacity(0.7),
@@ -246,15 +159,22 @@ class _SignUpState extends State<SignUp> {
                             ),
                           ),
                           onPressed: () {
-                            fireStore.collection('users').add({
-                              'name': controllers[0].text,
-                              'email': controllers[1].text,
-                              'password': controllers[2].text,
-                            });
-                            controllers[0].text = '';
-                            controllers[1].text = '';
-                            controllers[2].text = '';
-                            setState(() {});
+                            if (controllers[0].text != '' &&
+                                controllers[1].text != '' &&
+                                controllers[2].text != '') {
+                              fireStore.collection('users').add({
+                                'name': controllers[0].text,
+                                'email': controllers[1].text,
+                                'password': controllers[2].text,
+                              });
+                              controllers[0].text = '';
+                              controllers[1].text = '';
+                              controllers[2].text = '';
+                              alertAccountValidated(context);
+                            } else {
+                              alertError(context,
+                                  'You need to enter your email and password');
+                            }
                           },
                         ),
                       ],

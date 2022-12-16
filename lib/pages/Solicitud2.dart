@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiscal/provider/provider.dart';
+import 'package:fiscal/widgets/AppBar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -19,6 +20,12 @@ class _Solicitud2State extends State<Solicitud2> {
   PageController page = PageController();
 
   final fireStore = FirebaseFirestore.instance;
+
+  Future getData() async {
+    final res = await fireStore.collection("solicitudes").get();
+
+    return res.docs;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,72 +49,7 @@ class _Solicitud2State extends State<Solicitud2> {
             ListView(
               physics: const BouncingScrollPhysics(),
               children: [
-                Container(
-                  height: 60,
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  decoration: BoxDecoration(
-                    color: Colors.grey[900],
-                  ),
-                  child: Row(
-                    children: [
-                      GestureDetector(
-                        child: const Text(
-                          'Home',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        onTap: () {
-                          Navigator.of(context)
-                            ..pop()
-                            ..pop();
-                        },
-                      ),
-                      const SizedBox(width: 20),
-                      GestureDetector(
-                        onTap: () {},
-                        child: const Text(
-                          'Solicitud',
-                          style: TextStyle(
-                            color: Colors.white60,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      const Spacer(),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(context, '/Login');
-                        },
-                        child: const Text(
-                          'Login',
-                          style: TextStyle(
-                            color: Colors.white60,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(width: 20),
-                      GestureDetector(
-                        child: const Text(
-                          'Sign Up',
-                          style: TextStyle(
-                            color: Colors.white60,
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        onTap: () {
-                          Navigator.pushNamed(context, '/SignUp');
-                        },
-                      ),
-                    ],
-                  ),
-                ),
+                MyAppBar(),
                 Container(
                   height: 1500,
                   alignment: Alignment.center,
@@ -408,8 +350,13 @@ class _Solicitud2State extends State<Solicitud2> {
                               fontSize: 20,
                             ),
                           ),
-                          onPressed: () {
-                            fireStore.collection('solicitudes').add({
+                          onPressed: () async {
+                            final aux = await getData();
+
+                            fireStore
+                                .collection('solicitudes')
+                                .doc((aux.length).toString())
+                                .set({
                               'option': main.getOption,
                               'name': main.controllers[0].text,
                               'lastName': main.controllers[1].text,
@@ -425,6 +372,7 @@ class _Solicitud2State extends State<Solicitud2> {
                               'phoneTestigo': main.controllers[9].text,
                               'relationship': main.controllers[10].text,
                               'notes3': main.controllers[11].text,
+                              'status': '0',
                             });
                           },
                         ),
