@@ -43,7 +43,7 @@ class _HomeState extends State<Home> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
                       Text(
-                        '"La justicia es Reina y Señora de Todas las virtudes"',
+                        'Justice is Queen and Mistress of all virtues',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 27,
@@ -71,7 +71,7 @@ class _HomeState extends State<Home> {
                     children: [
                       const SizedBox(height: 40),
                       const Text(
-                        'Como hacer tu solicitud?',
+                        'How to make a solicitude?',
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 27,
@@ -101,7 +101,7 @@ class _HomeState extends State<Home> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 const Text(
-                                  'Paso 1',
+                                  'Step 1',
                                   style: TextStyle(
                                     color: Colors.black87,
                                     fontSize: 25,
@@ -113,7 +113,7 @@ class _HomeState extends State<Home> {
                                   size: 100,
                                 ),
                                 const Text(
-                                  'Primero debes registrarte',
+                                  'You must register first',
                                   style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
@@ -158,7 +158,7 @@ class _HomeState extends State<Home> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 const Text(
-                                  'Paso 2',
+                                  'Step 2',
                                   style: TextStyle(
                                     color: Colors.black87,
                                     fontSize: 25,
@@ -170,7 +170,7 @@ class _HomeState extends State<Home> {
                                   size: 100,
                                 ),
                                 const Text(
-                                  'A continuacion inicia sesion',
+                                  'Then Login into the system',
                                   style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
@@ -215,7 +215,7 @@ class _HomeState extends State<Home> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 const Text(
-                                  'Paso 3',
+                                  'Step 3',
                                   style: TextStyle(
                                     color: Colors.black87,
                                     fontSize: 25,
@@ -227,7 +227,7 @@ class _HomeState extends State<Home> {
                                   size: 100,
                                 ),
                                 const Text(
-                                  'Crear y enviar solicitud',
+                                  'Create and Send',
                                   style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w500,
@@ -239,7 +239,7 @@ class _HomeState extends State<Home> {
                                     backgroundColor: Colors.teal,
                                   ),
                                   child: const Text(
-                                    'Solicitud',
+                                    'Solicitude',
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 20,
@@ -263,6 +263,152 @@ class _HomeState extends State<Home> {
                       ),
                     ],
                   ),
+                ),
+                Container(
+                  height: 100,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                  ),
+                ),
+                Stack(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 90,
+                        horizontal: 100,
+                      ),
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          Text(
+                            'Fast and Easy',
+                            style: TextStyle(
+                              color: Colors.black54,
+                              fontSize: 40,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          SizedBox(height: 15),
+                          Divider(),
+                          SizedBox(height: 15),
+                          Text(
+                            'You can make requests in less than 5 min, be aware of your situations',
+                            style: TextStyle(
+                              color: Colors.black45,
+                              fontSize: 25,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Positioned(
+                      left: 100,
+                      top: -10,
+                      child: Icon(
+                        Icons.fast_forward_rounded,
+                        size: 100,
+                        color: Colors.orange.withOpacity(0.3),
+                      ),
+                    ),
+                  ],
+                ),
+                Stack(
+                  children: [
+                    Container(
+                      width: size.width,
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 100,
+                        horizontal: 100,
+                      ),
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: const [
+                          Text(
+                            'Secured by Google Cloud',
+                            style: TextStyle(
+                              color: Colors.black54,
+                              fontSize: 40,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          SizedBox(height: 15),
+                          Divider(),
+                          SizedBox(height: 15),
+                          Text(
+                            'Secure and safe',
+                            style: TextStyle(
+                              color: Colors.black45,
+                              fontSize: 25,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Positioned(
+                      right: 100,
+                      child: Icon(
+                        Icons.cloud,
+                        size: 100,
+                        color: Colors.blue.withOpacity(0.2),
+                      ),
+                    ),
+                  ],
+                ),
+                Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Container(
+                      width: size.width,
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 100,
+                        horizontal: 100,
+                      ),
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          Text(
+                            'Mobile App',
+                            style: TextStyle(
+                              color: Colors.black54,
+                              fontSize: 40,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          SizedBox(height: 15),
+                          Divider(),
+                          SizedBox(height: 15),
+                          Text(
+                            'Coming soon in Playstore and Appstore',
+                            style: TextStyle(
+                              color: Colors.black45,
+                              fontSize: 25,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Positioned(
+                      left: 100,
+                      top: -20,
+                      child: Icon(
+                        Icons.mobile_friendly_rounded,
+                        size: 100,
+                        color: Colors.purple.withOpacity(0.2),
+                      ),
+                    ),
+                  ],
                 ),
                 Container(
                   height: 200,

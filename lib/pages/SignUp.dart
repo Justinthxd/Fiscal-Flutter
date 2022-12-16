@@ -47,7 +47,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                   child: Container(
                     height: 550,
-                    width: 500,
+                    width: 450,
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 100, 100, 100)
                           .withOpacity(0.8),

@@ -21,6 +21,15 @@ class MainProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  int number = 0;
+
+  int get getNumber => number;
+
+  set setNumber(int number) {
+    this.number = number;
+    notifyListeners();
+  }
+
   String pruebas = '';
 
   String get getPruebas => pruebas;

@@ -1,6 +1,8 @@
 import 'package:fiscal/main.dart';
+import 'package:fiscal/provider/provider.dart';
 import 'package:fiscal/widgets/alerts.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MyAppBar extends StatefulWidget {
   MyAppBar({Key? key}) : super(key: key);
@@ -14,6 +16,7 @@ class _MyAppBarState extends State<MyAppBar> {
   Widget build(BuildContext context) {
     final isLogged = box.get('isLogged');
     final isAdmin = box.get('isAdmin');
+    final main = Provider.of<MainProvider>(context);
     return Container(
       height: 60,
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -45,7 +48,7 @@ class _MyAppBarState extends State<MyAppBar> {
               }
             },
             child: const Text(
-              'Solicitud',
+              'Solicitudes',
               style: TextStyle(
                 color: Colors.white60,
                 fontSize: 17,
@@ -115,6 +118,83 @@ class _MyAppBarState extends State<MyAppBar> {
                     Navigator.pushNamed(context, '/SignUp');
                   },
                 ),
+          const SizedBox(width: 20),
+          PopupMenuButton(
+            color: Colors.grey[900],
+            onSelected: (value) {},
+            itemBuilder: (BuildContext context) => [
+              !isAdmin
+                  ? const PopupMenuItem(
+                      value: '',
+                      child: Text(
+                        'User',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    )
+                  : const PopupMenuItem(
+                      value: '',
+                      child: Text(
+                        'Justin',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+              !isAdmin
+                  ? const PopupMenuItem(
+                      value: '',
+                      child: Text(
+                        'Solicitudes: -',
+                        style: TextStyle(
+                          color: Colors.white60,
+                        ),
+                      ),
+                    )
+                  : PopupMenuItem(
+                      value: '',
+                      child: Text(
+                        'Solicitudes: ${main.getNumber}',
+                        style: const TextStyle(
+                          color: Colors.white60,
+                        ),
+                      ),
+                    ),
+              !isAdmin
+                  ? const PopupMenuItem(
+                      value: '',
+                      child: Text(
+                        'Rechazos: -',
+                        style: TextStyle(
+                          color: Colors.white60,
+                        ),
+                      ),
+                    )
+                  : const PopupMenuItem(
+                      value: '',
+                      child: Text(
+                        'Rechazos: 0',
+                        style: TextStyle(
+                          color: Colors.white60,
+                        ),
+                      ),
+                    ),
+              const PopupMenuItem(
+                value: '',
+                child: Text(
+                  'Settings',
+                  style: TextStyle(
+                    color: Colors.white60,
+                  ),
+                ),
+              ),
+            ],
+            child: const Icon(
+              Icons.menu_rounded,
+              color: Colors.white,
+            ),
+          ),
         ],
       ),
     );

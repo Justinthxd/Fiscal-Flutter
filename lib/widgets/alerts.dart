@@ -60,9 +60,9 @@ alertError(BuildContext context, String text, [bool? login]) {
               const Text(
                 'Mensaje del sistema',
                 style: TextStyle(
-                  fontSize: 21,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white54,
+                  fontSize: 22,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.teal,
                 ),
               ),
               const SizedBox(height: 50),

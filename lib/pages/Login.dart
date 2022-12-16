@@ -54,7 +54,7 @@ class _LoginState extends State<Login> {
                   ),
                   child: Container(
                     height: 500,
-                    width: 500,
+                    width: 450,
                     decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 100, 100, 100)
                           .withOpacity(0.8),

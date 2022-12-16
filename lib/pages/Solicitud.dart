@@ -706,6 +706,10 @@ class _SolicitudState extends State<Solicitud> {
                           onPressed: () async {
                             final aux = await getData();
 
+                            final numberAux = main.getNumber;
+
+                            main.setNumber = numberAux + 1;
+
                             fireStore
                                 .collection('solicitudes')
                                 .doc((aux.length).toString())
