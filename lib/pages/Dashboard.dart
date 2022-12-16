@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiscal/provider/provider.dart';
 import 'package:fiscal/widgets/AppBar.dart';
+import 'package:fiscal/widgets/Item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -57,7 +58,7 @@ class _DashboardState extends State<Dashboard> {
                             horizontal: size.width * 0.08,
                           ),
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.95),
+                            color: Colors.white.withOpacity(1),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Column(
@@ -89,7 +90,7 @@ class _DashboardState extends State<Dashboard> {
                             horizontal: size.width * 0.05,
                           ),
                           decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.95),
+                            color: Colors.white.withOpacity(1),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Column(
@@ -137,136 +138,166 @@ class _DashboardState extends State<Dashboard> {
                     vertical: 40,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.99),
+                    color: Colors.white.withOpacity(1),
                   ),
                   child: FutureBuilder(
                     future: getData(),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
-                        return DataTable(
-                          columns: const [
-                            DataColumn(
-                              label: Text(
-                                'No.',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 14,
-                                ),
+                        return ListView.separated(
+                          separatorBuilder: (context, i) {
+                            return Container(
+                              margin: const EdgeInsets.symmetric(
+                                horizontal: 35,
                               ),
-                            ),
-                            DataColumn(
-                              label: Text(
-                                'Nombre',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 14,
-                                ),
+                              child: Divider(
+                                color: Colors.black.withOpacity(0.03),
+                                thickness: 3,
                               ),
-                            ),
-                            DataColumn(
-                              label: Text(
-                                'Tipo',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ),
-                            DataColumn(
-                              label: Text(
-                                'Fecha de solcitud',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ),
-                            DataColumn(
-                              label: Text(
-                                'Estado',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ),
-                            DataColumn(
-                              label: Text(
-                                '',
-                              ),
-                            ),
-                          ],
-                          rows: [
-                            for (int i = 0; i < snapshot.data.length; i++)
-                              DataRow(
-                                cells: [
-                                  DataCell(
-                                    Text('#${i + 1}'),
-                                  ),
-                                  DataCell(
-                                    Text('${snapshot.data[i].data()['name']}'),
-                                  ),
-                                  const DataCell(
-                                    Text('Online'),
-                                  ),
-                                  DataCell(
-                                    Text('${snapshot.data[i].data()['date']}'),
-                                  ),
-                                  DataCell(
-                                    snapshot.data[i]
-                                                .data()['status']
-                                                .toString()
-                                                .trim() ==
-                                            '0'
-                                        ? const Text('En Espera')
-                                        : snapshot.data[i]
-                                                    .data()['status']
-                                                    .toString()
-                                                    .trim() ==
-                                                '1'
-                                            ? const Text('Aceptada')
-                                            : const Text('Denegada'),
-                                  ),
-                                  DataCell(
-                                    Row(
-                                      children: [
-                                        ElevatedButton(
-                                          child: const Text('Aceptar'),
-                                          onPressed: () {
-                                            fireStore
-                                                .collection('solicitudes')
-                                                .doc(i.toString())
-                                                .update({'status': 1});
-                                            Future.delayed(
-                                                const Duration(seconds: 3),
-                                                () {});
-                                            setState(() {});
-                                          },
-                                        ),
-                                        const SizedBox(width: 10),
-                                        ElevatedButton(
-                                          style: ElevatedButton.styleFrom(
-                                            backgroundColor: Colors.red,
-                                          ),
-                                          child: const Text('Negar'),
-                                          onPressed: () {
-                                            fireStore
-                                                .collection('solicitudes')
-                                                .doc(i.toString())
-                                                .update({'status': 2});
-                                            Future.delayed(
-                                                const Duration(seconds: 3),
-                                                () {});
-                                            setState(() {});
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                          ],
+                            );
+                          },
+                          itemCount: snapshot.data.length,
+                          itemBuilder: (context, i) {
+                            return MyCardWidget(
+                              index: i,
+                              title: '${snapshot.data[i].data()['name']}',
+                              date: '${snapshot.data[i].data()['date']}',
+                              note: '${snapshot.data[i].data()['notes']}',
+                              status: '${snapshot.data[i].data()['status']}',
+                              phone: '${snapshot.data[i].data()['phone']}',
+                              name: '${snapshot.data[i].data()['name']}',
+                              lastName:
+                                  '${snapshot.data[i].data()['lastName']}',
+                              testigos:
+                                  '${snapshot.data[i].data()['testigos']}',
+                              pruebas: '${snapshot.data[i].data()['pruebas']}',
+                            );
+                          },
                         );
+                        // return DataTable(
+                        //   columns: const [
+                        //     DataColumn(
+                        //       label: Text(
+                        //         'No.',
+                        //         style: TextStyle(
+                        //           fontWeight: FontWeight.w700,
+                        //           fontSize: 14,
+                        //         ),
+                        //       ),
+                        //     ),
+                        //     DataColumn(
+                        //       label: Text(
+                        //         'Nombre',
+                        //         style: TextStyle(
+                        //           fontWeight: FontWeight.w700,
+                        //           fontSize: 14,
+                        //         ),
+                        //       ),
+                        //     ),
+                        //     DataColumn(
+                        //       label: Text(
+                        //         'Tipo',
+                        //         style: TextStyle(
+                        //           fontWeight: FontWeight.w700,
+                        //           fontSize: 14,
+                        //         ),
+                        //       ),
+                        //     ),
+                        //     DataColumn(
+                        //       label: Text(
+                        //         'Fecha de solcitud',
+                        //         style: TextStyle(
+                        //           fontWeight: FontWeight.w700,
+                        //           fontSize: 14,
+                        //         ),
+                        //       ),
+                        //     ),
+                        //     DataColumn(
+                        //       label: Text(
+                        //         'Estado',
+                        //         style: TextStyle(
+                        //           fontWeight: FontWeight.w700,
+                        //           fontSize: 14,
+                        //         ),
+                        //       ),
+                        //     ),
+                        //     DataColumn(
+                        //       label: Text(
+                        //         '',
+                        //       ),
+                        //     ),
+                        //   ],
+                        //   rows: [
+                        //     for (int i = 0; i < snapshot.data.length; i++)
+                        //       DataRow(
+                        //         cells: [
+                        //           DataCell(
+                        //             Text('#${i + 1}'),
+                        //           ),
+                        //           DataCell(
+                        //             Text('${snapshot.data[i].data()['name']}'),
+                        //           ),
+                        //           const DataCell(
+                        //             Text('Online'),
+                        //           ),
+                        //           DataCell(
+                        //             Text('${snapshot.data[i].data()['date']}'),
+                        //           ),
+                        //           DataCell(
+                        //             snapshot.data[i]
+                        //                         .data()['status']
+                        //                         .toString()
+                        //                         .trim() ==
+                        //                     '0'
+                        //                 ? const Text('En Espera')
+                        //                 : snapshot.data[i]
+                        //                             .data()['status']
+                        //                             .toString()
+                        //                             .trim() ==
+                        //                         '1'
+                        //                     ? const Text('Aceptada')
+                        //                     : const Text('Denegada'),
+                        //           ),
+                        //           DataCell(
+                        //             Row(
+                        //               children: [
+                        //                 ElevatedButton(
+                        //                   child: const Text('Aceptar'),
+                        //                   onPressed: () {
+                        //                     fireStore
+                        //                         .collection('solicitudes')
+                        //                         .doc(i.toString())
+                        //                         .update({'status': 1});
+                        //                     Future.delayed(
+                        //                         const Duration(seconds: 3),
+                        //                         () {});
+                        //                     setState(() {});
+                        //                   },
+                        //                 ),
+                        //                 const SizedBox(width: 10),
+                        //                 ElevatedButton(
+                        //                   style: ElevatedButton.styleFrom(
+                        //                     backgroundColor: Colors.red,
+                        //                   ),
+                        //                   child: const Text('Negar'),
+                        //                   onPressed: () {
+                        //                     fireStore
+                        //                         .collection('solicitudes')
+                        //                         .doc(i.toString())
+                        //                         .update({'status': 2});
+                        //                     Future.delayed(
+                        //                         const Duration(seconds: 3),
+                        //                         () {});
+                        //                     setState(() {});
+                        //                   },
+                        //                 ),
+                        //               ],
+                        //             ),
+                        //           ),
+                        //         ],
+                        //       ),
+                        //   ],
+                        // );
                       } else {
                         return const Center(
                           child: CircularProgressIndicator(),

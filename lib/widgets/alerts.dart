@@ -62,7 +62,7 @@ alertError(BuildContext context, String text, [bool? login]) {
                 style: TextStyle(
                   fontSize: 21,
                   fontWeight: FontWeight.w600,
-                  color: Colors.white,
+                  color: Colors.white54,
                 ),
               ),
               const SizedBox(height: 50),
@@ -70,7 +70,7 @@ alertError(BuildContext context, String text, [bool? login]) {
                 text,
                 style: const TextStyle(
                   fontSize: 18,
-                  color: Colors.white60,
+                  color: Colors.white,
                   fontWeight: FontWeight.w500,
                 ),
               ),
